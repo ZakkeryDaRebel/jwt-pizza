@@ -12,7 +12,7 @@ import {
   JWTPayload,
 } from "./pizzaService";
 
-const pizzaServiceUrl = import.meta.env.VITE_PIZZA_SERVICE_URL;
+const pizzaServiceUrl = import.meta.env.development.VITE_PIZZA_SERVICE_URL;
 const pizzaFactoryUrl = import.meta.env.VITE_PIZZA_FACTORY_URL;
 
 class HttpPizzaService implements PizzaService {
