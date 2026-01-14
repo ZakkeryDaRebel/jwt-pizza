@@ -14,6 +14,7 @@ interface Props {
 export default function Footer(props: Props) {
   const [version, setVersion] = React.useState("");
 
+  //TODO: Currently, this version.json is the factory's instead of the front ends? Probably because it uses fetch. I'll need to look into this more
   React.useEffect(() => {
     fetch("/version.json")
       .then((response) => response.json())
