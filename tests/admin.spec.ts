@@ -107,7 +107,65 @@ test("create franchise", async ({ page }) => {
 
 // test("create store", async ({ page }) => {
 //   await adminInit(page);
-//   await page.goto("http://localhost:5173/");
+
+//   let stores: any[] = [];
+
+//   await page.route("**/api/franchise*", async (route) => {
+//     if (route.request().method() === "GET") {
+//       await route.fulfill({
+//         status: 200,
+//         contentType: "application/json",
+//         body: JSON.stringify({
+//           franchises: [
+//             {
+//               id: 6,
+//               name: "Franchise A",
+//               admins: [
+//                 {
+//                   id: 1,
+//                   name: "admin",
+//                   email: "a@jwt.com",
+//                 },
+//               ],
+//               stores: stores,
+//             },
+//           ],
+//           more: false,
+//         }),
+//       });
+//     }
+
+//     if (route.request().method() === "POST") {
+//       await route.fulfill({
+//         status: 200,
+//         contentType: "application/json",
+//         body: JSON.stringify({ id: 3, franchiseId: 6, name: "New Store" }),
+//       });
+//       stores.push({ id: 3, franchiseId: 6, name: "New Store" });
+//     }
+//   });
+
+//   await page.route("**/api/franchise/*", async (route) => {
+//     await route.fulfill({
+//       status: 200,
+//       contentType: "application/json",
+//       body: JSON.stringify([
+//         {
+//           id: 6,
+//           name: "Franchise A",
+//           admins: [
+//             {
+//               id: 1,
+//               name: "admin",
+//               email: "a@jwt.com",
+//             },
+//           ],
+//           stores: [],
+//         },
+//       ]),
+//     });
+//   });
+
 //   await page.getByRole("link", { name: "Franchise" }).click();
 //   await expect(page.getByText("Franchise A")).toBeVisible();
 //   await expect(
@@ -115,9 +173,13 @@ test("create franchise", async ({ page }) => {
 //   ).toBeVisible();
 //   await page.getByRole("button", { name: "Create store" }).click();
 //   await page.getByRole("textbox", { name: "store name" }).click();
-//   await page.getByRole("textbox", { name: "store name" }).fill("Store A");
+//   await page.getByRole("textbox", { name: "store name" }).fill("New Store");
 //   await page.getByRole("button", { name: "Create" }).click();
-//   await expect(page.getByRole("cell", { name: "Store A" })).toBeVisible();
+//   await expect(page.getByRole("cell", { name: "New Store" })).toBeVisible();
+// });
+
+// test('close store', async ({ page }) => {
+//   await adminInit(page);
 //   await expect(page.getByRole("button", { name: "Close" })).toBeVisible();
 //   await page.getByRole("button", { name: "Close" }).click();
 //   await expect(page.getByText("Sorry to see you go")).toBeVisible();
