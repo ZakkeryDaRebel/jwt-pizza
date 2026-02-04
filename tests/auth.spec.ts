@@ -21,14 +21,12 @@ test("login then logout", async ({ page }) => {
 
   await page.getByRole("link", { name: "Login" }).click();
   await page.getByRole("textbox", { name: "Email address" }).click();
-  await page
-    .getByRole("textbox", { name: "Email address" })
-    .fill("bob@gmail.com");
+  await page.getByRole("textbox", { name: "Email address" }).fill("a@jwt.com");
   await page.getByRole("textbox", { name: "Password" }).click();
-  await page.getByRole("textbox", { name: "Password" }).fill("monkeypie");
+  await page.getByRole("textbox", { name: "Password" }).fill("admin");
   await page.getByRole("button", { name: "Login" }).click();
   await expect(
-    page.getByRole("link", { name: "b", exact: true }),
+    page.getByRole("link", { name: "常", exact: true }),
   ).toBeVisible();
 
   await page.getByRole("link", { name: "Logout" }).click();
