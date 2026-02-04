@@ -44,3 +44,10 @@ test("return home", async ({ page }) => {
   await expect(page.getByRole("link", { name: "home" })).toBeVisible();
   await page.getByRole("link", { name: "home" }).click();
 });
+
+test("not found", async ({ page }) => {
+  await page.goto("http://localhost:5173/pizza");
+
+  await expect(page.getByText("Oops")).toBeVisible();
+  await expect(page.getByText("It looks like we have dropped")).toBeVisible();
+});
