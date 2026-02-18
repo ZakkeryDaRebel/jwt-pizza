@@ -118,12 +118,16 @@ interface PizzaService {
   getFranchises(
     page: number,
     limit: number,
-    nameFilter: string
+    nameFilter: string,
   ): Promise<FranchiseList>;
   closeFranchise(franchise: Franchise): Promise<void>;
   createStore(franchise: Franchise, store: Store): Promise<Store>;
   closeStore(franchise: Franchise, store: Store): Promise<null>;
   docs(docType: string): Promise<Endpoints>;
+  //
+  //Added endpoints
+  //
+  updateUser(user: User): Promise<User>;
 }
 
 export {
