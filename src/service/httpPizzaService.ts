@@ -262,7 +262,7 @@ class HttpPizzaService implements PizzaService {
     nameFilter: string,
   ): Promise<{ users: User[]; more: boolean }> {
     const result = await this.callEndpoint(
-      `/api/user?userPage=${userPage}&limit=${limit}&name=${nameFilter}`,
+      `/api/user?page=${userPage}&limit=${limit}&name=${nameFilter}`,
     );
     return Promise.resolve(result);
   }
