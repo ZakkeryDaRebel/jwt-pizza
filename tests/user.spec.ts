@@ -161,3 +161,29 @@ test("updateUser as admin", async ({ page }) => {
   await page.getByRole("button", { name: "Login" }).click();
   await expect(page.getByRole("link", { name: "Admin" })).toBeVisible();
 });
+
+test("list users", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+
+  await page.getByRole("link", { name: "Login" }).click();
+  await page.getByRole("textbox", { name: "Email address" }).fill("a@jwt.com");
+  await page.getByRole("textbox", { name: "Password" }).fill("admin");
+  await page.getByRole("button", { name: "Login" }).click();
+  await page.getByRole("link", { name: "Admin" }).click();
+
+  await expect(page.getByRole("heading", { name: "Users" })).toBeVisible();
+  await expect(page.getByRole("columnheader", { name: "Name" })).toBeVisible();
+  await expect(page.getByRole("cell", { name: "常用名字" })).toBeVisible();
+  await expect(page.getByRole("columnheader", { name: "Email" })).toBeVisible();
+  await expect(page.getByRole("cell", { name: "a@jwt.com" })).toBeVisible();
+  await expect(page.getByRole("columnheader", { name: "Role" })).toBeVisible();
+  await expect(page.getByRole("cell", { name: "admin" })).toBeVisible();
+  await expect(
+    page.getByRole("columnheader", { name: "Action" }).first(),
+  ).toBeVisible();
+  await expect(
+    page
+      .getByRole("row", { name: "常用名字 a@jwt.com admin X" })
+      .getByRole("button"),
+  ).toBeVisible();
+});
