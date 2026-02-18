@@ -116,3 +116,48 @@ test("updateUser email", async ({ page }) => {
   await expect(page.getByRole("main")).toContainText("Login");
   await expect(page.getByText('{"code":404,"message":"')).toBeVisible();
 });
+
+test("updateUser as admin", async ({ page }) => {
+  const email = `admin${Math.floor(Math.random() * 10000)}@jwt.com`;
+  await page.goto("http://localhost:5173/");
+
+  await page.getByRole("link", { name: "Login" }).click();
+  await page.getByRole("textbox", { name: "Email address" }).fill("a@jwt.com");
+  await page.getByRole("textbox", { name: "Password" }).fill("admin");
+  await page.getByRole("button", { name: "Login" }).click();
+
+  await expect(page.getByRole("link", { name: "Admin" })).toBeVisible();
+  await page.getByRole("link", { name: "常" }).click();
+  await page.getByRole("button", { name: "Edit" }).click();
+  await page.getByRole("textbox").first().fill("old admin");
+  await page.locator('input[type="email"]').fill("oa@jwt.com");
+  await page.locator("#password").fill("old");
+  await page.getByRole("button", { name: "Update" }).click();
+
+  await expect(
+    page.getByRole("link", { name: "oa", exact: true }),
+  ).toBeVisible();
+  await page.getByRole("link", { name: "Logout" }).click();
+  await page.getByRole("link", { name: "Login" }).click();
+  await page.getByRole("textbox", { name: "Email address" }).fill("oa@jwt.com");
+  await page.getByRole("textbox", { name: "Password" }).fill("old");
+  await page.getByRole("button", { name: "Login" }).click();
+
+  await expect(page.getByRole("link", { name: "Admin" })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "oa", exact: true }),
+  ).toBeVisible();
+  await page.getByRole("link", { name: "oa", exact: true }).click();
+  await page.getByRole("button", { name: "Edit" }).click();
+  await page.getByRole("textbox").first().fill("常用名字");
+  await page.locator('input[type="email"]').fill("a@jwt.com");
+  await page.locator("#password").fill("admin");
+  await page.getByRole("button", { name: "Update" }).click();
+
+  await page.getByRole("link", { name: "Logout" }).click();
+  await page.getByRole("link", { name: "Login" }).click();
+  await page.getByRole("textbox", { name: "Email address" }).fill("a@jwt.com");
+  await page.getByRole("textbox", { name: "Password" }).fill("admin");
+  await page.getByRole("button", { name: "Login" }).click();
+  await expect(page.getByRole("link", { name: "Admin" })).toBeVisible();
+});
