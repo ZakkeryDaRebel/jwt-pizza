@@ -26,7 +26,7 @@ class HttpPizzaService implements PizzaService {
   async callEndpoint(
     path: string,
     method: string = "GET",
-    body?: any
+    body?: any,
   ): Promise<any> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -186,10 +186,10 @@ class HttpPizzaService implements PizzaService {
   async getFranchises(
     page: number = 0,
     limit: number = 10,
-    nameFilter: string = "*"
+    nameFilter: string = "*",
   ): Promise<FranchiseList> {
     return this.callEndpoint(
-      `/api/franchise?page=${page}&limit=${limit}&name=${nameFilter}`
+      `/api/franchise?page=${page}&limit=${limit}&name=${nameFilter}`,
     );
   }
 
@@ -212,7 +212,7 @@ class HttpPizzaService implements PizzaService {
     return this.callEndpoint(
       `/api/franchise/${franchise.id}/store`,
       "POST",
-      store
+      store,
     );
   }
 
@@ -225,7 +225,7 @@ class HttpPizzaService implements PizzaService {
   async closeStore(franchise: Franchise, store: Store): Promise<null> {
     return this.callEndpoint(
       `/api/franchise/${franchise.id}/store/${store.id}`,
-      "DELETE"
+      "DELETE",
     );
   }
 
@@ -239,6 +239,16 @@ class HttpPizzaService implements PizzaService {
       return this.callEndpoint(pizzaFactoryUrl + `/api/docs`);
     }
     return this.callEndpoint(`/api/docs`);
+  }
+
+  async updateUser(updatedUser: User): Promise<User> {
+    const { user, token } = await this.callEndpoint(
+      `/api/user/${updatedUser.id}`,
+      "PUT",
+      updatedUser,
+    );
+    localStorage.setItem("token", token);
+    return Promise.resolve(user);
   }
 }
 
