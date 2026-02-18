@@ -70,7 +70,15 @@ jobs:
 
       - name: Start backend service
         working-directory: ./jwt-pizza-service
-        run: npm start &
+        run: npm start > backend.log 2>&1 &
+
+      - name: Check backend process
+        run: |
+          sleep 2
+          ps aux | grep node
+          if [ -f ./jwt-pizza-service/backend.log ]; then
+            cat ./jwt-pizza-service/backend.log
+          fi
 
       - name: Wait for backend to be ready
         run: |
@@ -83,6 +91,7 @@ jobs:
             sleep 2
           done
           echo "Backend failed to start"
+          tail -50 ./jwt-pizza-service/backend.log || true
           exit 1
 
       - name: Install Playwright browsers
