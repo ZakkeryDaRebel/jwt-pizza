@@ -58,6 +58,13 @@ jobs:
     env:
       VITE_PIZZA_SERVICE_URL: http://localhost:3000
     steps:
+      - name: Debug service status
+        run: |
+          echo "Checking if service is running..."
+          curl -v http://localhost:3000/api/status || echo "Service not ready yet"
+          sleep 2
+          curl -v http://localhost:3000/api/status || echo "Service still not ready"
+
       - name: Checkout repo
         uses: actions/checkout@v4
 
