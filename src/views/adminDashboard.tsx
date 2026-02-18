@@ -76,7 +76,7 @@ export default function AdminDashboard(props: Props) {
   }
 
   async function deleteUser(user: User) {
-    await pizzaService.deleteUser(user.id);
+    await pizzaService.deleteUser(user.id!);
     setUserList(await pizzaService.getUsers(userPage, 10, "*"));
   }
 
@@ -127,7 +127,7 @@ export default function AdminDashboard(props: Props) {
                               {user.email}
                             </td>
                             <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-800 text-center">
-                              {user.role}
+                              {user.roles?.map((role) => role.role).join(", ")}
                             </td>
                             <td className="px-6 py-2 whitespace-nowrap text-end text-sm font-medium">
                               <button
