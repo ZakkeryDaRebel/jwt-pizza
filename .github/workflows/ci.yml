@@ -46,6 +46,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     services:
+      mysql:
+        image: mysql:8.0.29
+        env:
+          MYSQL_ROOT_PASSWORD: tempdbpassword
+          MYSQL_DATABASE: pizza
+        ports:
+          - "3306:3306"
+        options: >-
+          --health-cmd "mysqladmin ping -ptempdbpassword" --health-interval 10s --health-start-period 10s --health-timeout 5s --health-retries 10
       jwt-pizza-service:
         image: ghcr.io/zakkerydarebel/jwt-pizza-service-docker-image:latest
         ports:
@@ -54,6 +63,7 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           FACTORY_API_KEY: ${{ secrets.FACTORY_API_KEY }}
           NET_ID: ${{ secrets.NET_ID }}
+
     env:
       VITE_PIZZA_SERVICE_URL: http://localhost:3000
     steps:
