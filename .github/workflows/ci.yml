@@ -45,6 +45,18 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    services:
+      jwt-pizza-service:
+        image: ghcr.io/zakkerydarebel/jwt-pizza-service-docker-image:latest
+        ports:
+          - 3000:3000
+        options: >-
+          --health-cmd "curl -f http://localhost:3000/api/status || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      VITE_PIZZA_SERVICE_URL: http://localhost:3000
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -56,43 +68,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Checkout backend service
-        uses: actions/checkout@v4
-        with:
-          repository: ZakkeryDaRebel/jwt-pizza-service
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: ./jwt-pizza-service
-
-      - name: Setup backend
-        working-directory: ./jwt-pizza-service
-        run: npm ci
-
-      - name: Start backend service
-        working-directory: ./jwt-pizza-service
-        run: npm start > backend.log 2>&1 &
-
-      - name: Check backend process
-        run: |
-          sleep 2
-          ps aux | grep node
-          if [ -f ./jwt-pizza-service/backend.log ]; then
-            cat ./jwt-pizza-service/backend.log
-          fi
-
-      - name: Wait for backend to be ready
-        run: |
-          for i in {1..30}; do
-            if curl -f http://localhost:3000/api/status 2>/dev/null; then
-              echo "Backend is ready"
-              exit 0
-            fi
-            echo "Waiting for backend... ($i/30)"
-            sleep 2
-          done
-          echo "Backend failed to start"
-          tail -50 ./jwt-pizza-service/backend.log || true
-          exit 1
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
