@@ -128,6 +128,12 @@ interface PizzaService {
   //Added endpoints
   //
   updateUser(user: User): Promise<User>;
+  deleteUser(userId: string): Promise<void>;
+  getUsers(
+    userPage: number,
+    limit: number,
+    nameFilter: string,
+  ): Promise<{ users: User[]; more: boolean }>;
 }
 
 export {
