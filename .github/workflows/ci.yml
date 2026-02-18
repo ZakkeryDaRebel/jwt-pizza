@@ -66,9 +66,7 @@ jobs:
 
       - name: Setup backend
         working-directory: ./jwt-pizza-service
-        run: |
-          npm ci
-          npm run build
+        run: npm ci
 
       - name: Start backend service
         working-directory: ./jwt-pizza-service
