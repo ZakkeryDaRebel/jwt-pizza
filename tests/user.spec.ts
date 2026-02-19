@@ -187,3 +187,33 @@ test("list users", async ({ page }) => {
       .getByRole("button"),
   ).toBeVisible();
 });
+
+test("list users arrows", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+
+  await page.getByRole("link", { name: "Login" }).click();
+  await page.getByRole("textbox", { name: "Email address" }).fill("a@jwt.com");
+  await page.getByRole("textbox", { name: "Password" }).fill("admin");
+  await page.getByRole("button", { name: "Login" }).click();
+  await page.getByRole("link", { name: "Admin" }).click();
+
+  await expect(page.getByRole("cell", { name: "常用名字" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "»" }).first()).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "»" }).first(),
+  ).not.toBeDisabled();
+  await expect(page.getByRole("button", { name: "«" }).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: "«" }).first()).toBeDisabled();
+  await page.getByRole("button", { name: "»" }).first().click();
+  await expect(page.getByRole("cell", { name: "常用名字" })).not.toBeVisible();
+  await expect(page.getByRole("button", { name: "»" }).first()).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "»" }).first(),
+  ).not.toBeDisabled();
+  await expect(page.getByRole("button", { name: "«" }).first()).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "»" }).first(),
+  ).not.toBeDisabled();
+  await page.getByRole("button", { name: "«" }).first().click();
+  await expect(page.getByRole("cell", { name: "常用名字" })).toBeVisible();
+});
