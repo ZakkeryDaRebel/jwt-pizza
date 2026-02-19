@@ -217,3 +217,30 @@ test("list users arrows", async ({ page }) => {
   await page.getByRole("button", { name: "«" }).first().click();
   await expect(page.getByRole("cell", { name: "常用名字" })).toBeVisible();
 });
+
+test("list users search and delete", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+
+  await page.getByRole("link", { name: "Register" }).click();
+  await page.getByRole("textbox", { name: "Full name" }).fill("delete me");
+  const email = `deleteme${Math.floor(Math.random() * 10000)}@jwt.com`;
+  await page.getByRole("textbox", { name: "Email address" }).fill(email);
+  await page.getByRole("textbox", { name: "Password" }).fill("delete");
+  await page.getByRole("button", { name: "Register" }).click();
+
+  await page.getByRole("link", { name: "Logout" }).click();
+
+  await page.getByRole("link", { name: "Login" }).click();
+  await page.getByRole("textbox", { name: "Email address" }).fill("a@jwt.com");
+  await page.getByRole("textbox", { name: "Password" }).fill("admin");
+  await page.getByRole("button", { name: "Login" }).click();
+  await page.getByRole("link", { name: "Admin" }).click();
+
+  await page.getByRole("textbox", { name: "Search" }).fill("delete me");
+  await page.getByRole("button", { name: "Search" }).click();
+  await page.getByRole("textbox", { name: "Search" }).fill("");
+
+  await expect(page.getByRole("cell", { name: "delete me" })).toBeVisible();
+  await page.getByRole("button").first().click();
+  await expect(page.getByRole("cell", { name: "delete me" })).not.toBeVisible();
+});
