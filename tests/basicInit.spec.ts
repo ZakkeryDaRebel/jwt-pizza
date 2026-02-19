@@ -158,8 +158,11 @@ test("purchase with login and verify", async ({ page }) => {
   // Verify
   await expect(page.getByRole("button", { name: "Verify" })).toBeVisible();
   await page.getByRole("button", { name: "Verify" }).click();
+  await page.waitForSelector("#hs-jwt-modal", { state: "visible" });
   await expect(page.getByText("JWT Pizza - valid")).toBeVisible();
+  await page.waitForTimeout(1000); // Wait for a moment to see the result before closing
   await page.getByRole("button", { name: "Close" }).click();
+  await page.waitForSelector("#hs-jwt-modal", { state: "hidden" });
 
   // Prepare to order more
   await page.getByRole("button", { name: "Order more" }).click();
