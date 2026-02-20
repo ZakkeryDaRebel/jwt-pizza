@@ -1,5 +1,87 @@
 import { test, expect } from "playwright-test-coverage";
 
+test("list users", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+
+  await page.getByRole("link", { name: "Login" }).click();
+  await page.getByRole("textbox", { name: "Email address" }).fill("a@jwt.com");
+  await page.getByRole("textbox", { name: "Password" }).fill("admin");
+  await page.getByRole("button", { name: "Login" }).click();
+  await page.getByRole("link", { name: "Admin" }).click();
+
+  await expect(page.getByRole("heading", { name: "Users" })).toBeVisible();
+  await expect(page.getByRole("columnheader", { name: "Name" })).toBeVisible();
+  await expect(page.getByRole("cell", { name: "常用名字" })).toBeVisible();
+  await expect(page.getByRole("columnheader", { name: "Email" })).toBeVisible();
+  await expect(page.getByRole("cell", { name: "a@jwt.com" })).toBeVisible();
+  await expect(page.getByRole("columnheader", { name: "Role" })).toBeVisible();
+  await expect(page.getByRole("cell", { name: "admin" })).toBeVisible();
+  await expect(
+    page.getByRole("columnheader", { name: "Action" }).first(),
+  ).toBeVisible();
+  await expect(
+    page
+      .getByRole("row", { name: "常用名字 a@jwt.com admin X" })
+      .getByRole("button"),
+  ).toBeVisible();
+});
+
+test("list users arrows", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+
+  await page.getByRole("link", { name: "Login" }).click();
+  await page.getByRole("textbox", { name: "Email address" }).fill("a@jwt.com");
+  await page.getByRole("textbox", { name: "Password" }).fill("admin");
+  await page.getByRole("button", { name: "Login" }).click();
+  await page.getByRole("link", { name: "Admin" }).click();
+
+  await expect(page.getByRole("cell", { name: "常用名字" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "»" }).first()).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "»" }).first(),
+  ).not.toBeDisabled();
+  await expect(page.getByRole("button", { name: "«" }).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: "«" }).first()).toBeDisabled();
+  await page.getByRole("button", { name: "»" }).first().click();
+  await expect(page.getByRole("cell", { name: "常用名字" })).not.toBeVisible();
+  await expect(page.getByRole("button", { name: "»" }).first()).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "»" }).first(),
+  ).not.toBeDisabled();
+  await expect(page.getByRole("button", { name: "«" }).first()).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "»" }).first(),
+  ).not.toBeDisabled();
+  await page.getByRole("button", { name: "«" }).first().click();
+  await expect(page.getByRole("cell", { name: "常用名字" })).toBeVisible();
+});
+
+test("list users search and delete", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+
+  await page.getByRole("link", { name: "Register" }).click();
+  await page.getByRole("textbox", { name: "Full name" }).fill("delete me");
+  const email = `deleteme${Math.floor(Math.random() * 10000)}@jwt.com`;
+  await page.getByRole("textbox", { name: "Email address" }).fill(email);
+  await page.getByRole("textbox", { name: "Password" }).fill("delete");
+  await page.getByRole("button", { name: "Register" }).click();
+
+  await page.getByRole("link", { name: "Logout" }).click();
+
+  await page.getByRole("link", { name: "Login" }).click();
+  await page.getByRole("textbox", { name: "Email address" }).fill("a@jwt.com");
+  await page.getByRole("textbox", { name: "Password" }).fill("admin");
+  await page.getByRole("button", { name: "Login" }).click();
+  await page.getByRole("link", { name: "Admin" }).click();
+
+  await page.getByRole("textbox", { name: "Search" }).fill("delete");
+  await page.getByRole("button", { name: "Search" }).click();
+
+  await expect(page.getByRole("cell", { name: "delete me" })).toBeVisible();
+  await page.getByRole("button").first().click();
+  await expect(page.getByRole("cell", { name: "delete me" })).not.toBeVisible();
+});
+
 test("updateUser username", async ({ page }) => {
   const email = `user${Math.floor(Math.random() * 10000)}@jwt.com`;
   await page.goto("http://localhost:5173/");
@@ -115,98 +197,6 @@ test("updateUser email", async ({ page }) => {
 
   await expect(page.getByRole("main")).toContainText("Login");
   await expect(page.getByText('{"code":404,"message":"')).toBeVisible();
-});
-
-test("list users", async ({ page }) => {
-  await page.goto("http://localhost:5173/");
-
-  await page.getByRole("link", { name: "Login" }).click();
-  await page.getByRole("textbox", { name: "Email address" }).fill("a@jwt.com");
-  await page.getByRole("textbox", { name: "Password" }).fill("admin");
-  await page.getByRole("button", { name: "Login" }).click();
-  await page.getByRole("link", { name: "Admin" }).click();
-
-  await expect(page.getByRole("heading", { name: "Users" })).toBeVisible();
-  await expect(page.getByRole("columnheader", { name: "Name" })).toBeVisible();
-  await expect(page.getByRole("cell", { name: "常用名字" })).toBeVisible();
-  await expect(page.getByRole("columnheader", { name: "Email" })).toBeVisible();
-  await expect(page.getByRole("cell", { name: "a@jwt.com" })).toBeVisible();
-  await expect(page.getByRole("columnheader", { name: "Role" })).toBeVisible();
-  await expect(page.getByRole("cell", { name: "admin" })).toBeVisible();
-  await expect(
-    page.getByRole("columnheader", { name: "Action" }).first(),
-  ).toBeVisible();
-  await expect(
-    page
-      .getByRole("row", { name: "常用名字 a@jwt.com admin X" })
-      .getByRole("button"),
-  ).toBeVisible();
-});
-
-test("list users arrows", async ({ page }) => {
-  await page.goto("http://localhost:5173/");
-
-  for (let i = 0; i < 15; i++) {
-    await page.getByRole("link", { name: "Register" }).click();
-    await page.getByRole("textbox", { name: "Full name" }).fill(`user${i}`);
-    const email = `user${i}${Math.floor(Math.random() * 10000)}@jwt.com`;
-    await page.getByRole("textbox", { name: "Email address" }).fill(email);
-    await page.getByRole("textbox", { name: "Password" }).fill("password");
-    await page.getByRole("button", { name: "Register" }).click();
-    await page.getByRole("link", { name: "Logout" }).click();
-  }
-
-  await page.getByRole("link", { name: "Login" }).click();
-  await page.getByRole("textbox", { name: "Email address" }).fill("a@jwt.com");
-  await page.getByRole("textbox", { name: "Password" }).fill("admin");
-  await page.getByRole("button", { name: "Login" }).click();
-  await page.getByRole("link", { name: "Admin" }).click();
-
-  await expect(page.getByRole("cell", { name: "常用名字" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "»" }).first()).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "»" }).first(),
-  ).not.toBeDisabled();
-  await expect(page.getByRole("button", { name: "«" }).first()).toBeVisible();
-  await expect(page.getByRole("button", { name: "«" }).first()).toBeDisabled();
-  await page.getByRole("button", { name: "»" }).first().click();
-  await expect(page.getByRole("cell", { name: "常用名字" })).not.toBeVisible();
-  await expect(page.getByRole("button", { name: "»" }).first()).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "»" }).first(),
-  ).not.toBeDisabled();
-  await expect(page.getByRole("button", { name: "«" }).first()).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "»" }).first(),
-  ).not.toBeDisabled();
-  await page.getByRole("button", { name: "«" }).first().click();
-  await expect(page.getByRole("cell", { name: "常用名字" })).toBeVisible();
-});
-
-test("list users search and delete", async ({ page }) => {
-  await page.goto("http://localhost:5173/");
-
-  await page.getByRole("link", { name: "Register" }).click();
-  await page.getByRole("textbox", { name: "Full name" }).fill("delete me");
-  const email = `deleteme${Math.floor(Math.random() * 10000)}@jwt.com`;
-  await page.getByRole("textbox", { name: "Email address" }).fill(email);
-  await page.getByRole("textbox", { name: "Password" }).fill("delete");
-  await page.getByRole("button", { name: "Register" }).click();
-
-  await page.getByRole("link", { name: "Logout" }).click();
-
-  await page.getByRole("link", { name: "Login" }).click();
-  await page.getByRole("textbox", { name: "Email address" }).fill("a@jwt.com");
-  await page.getByRole("textbox", { name: "Password" }).fill("admin");
-  await page.getByRole("button", { name: "Login" }).click();
-  await page.getByRole("link", { name: "Admin" }).click();
-
-  await page.getByRole("textbox", { name: "Search" }).fill("delete");
-  await page.getByRole("button", { name: "Search" }).click();
-
-  await expect(page.getByRole("cell", { name: "delete me" })).toBeVisible();
-  await page.getByRole("button").first().click();
-  await expect(page.getByRole("cell", { name: "delete me" })).not.toBeVisible();
 });
 
 test("updateUser as admin", async ({ page }) => {
