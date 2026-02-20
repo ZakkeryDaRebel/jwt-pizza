@@ -1,5 +1,19 @@
 import { test, expect } from "playwright-test-coverage";
 
+test("db register", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+
+  for (let i = 0; i < 11; i++) {
+    await page.getByRole("link", { name: "Register" }).click();
+    await page.getByRole("textbox", { name: "Full name" }).fill(`user${i}`);
+    const email = `user${i}${Math.floor(Math.random() * 10000)}@jwt.com`;
+    await page.getByRole("textbox", { name: "Email address" }).fill(email);
+    await page.getByRole("textbox", { name: "Password" }).fill("password");
+    await page.getByRole("button", { name: "Register" }).click();
+    await page.getByRole("link", { name: "Logout" }).click();
+  }
+});
+
 test("list users", async ({ page }) => {
   await page.goto("http://localhost:5173/");
 
