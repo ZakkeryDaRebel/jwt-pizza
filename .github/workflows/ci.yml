@@ -65,8 +65,6 @@ jobs:
           FACTORY_API_KEY: ${{ secrets.FACTORY_API_KEY }}
           NET_ID: ${{ secrets.NET_ID }}
 
-    env:
-      VITE_PIZZA_SERVICE_URL: http://localhost:3000
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -81,14 +79,6 @@ jobs:
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
-
-      - name: Wait for backend
-        run: |
-          for i in {1..30}; do
-            curl -f http://localhost:3000/api/docs && break
-            echo "Waiting for backend..."
-            sleep 2
-          done
 
       - name: Run tests
         run: npm run test:coverage
