@@ -1,134 +1,65 @@
-# Incident: YYYY-MM-DD HH-mm-ss
+# Incident: 2026-04-03 11:00:30
 
 ## Summary
 
-> [!NOTE]
-> Write a summary of the incident in a few sentences. Include what happened, why, the severity of the incident and how long the impact lasted.
+At 11:00:30 MDT on 2026-04-03 a user tried to order a single Veggie pizza, and the pizza order failed to be fulfilled at the factory.
 
-```md
-**EXAMPLE**:
+Though there was 0 alerts sent out, this lasted until 12:03:14 MDT on 2026-04-03 when an Admin looked at Grafana, noticed high latency spikes in pizza order, and decided to test the system. The Admin then tried to order a pizza and noticed that the pizza order failed, so he proceeded to look into the logs, noticed the issue with the pizza factory and fixed the issue.
 
-Between the hour of {time range of incident, e.g. 15:45 and 16:35} on {DATE}, {NUMBER} users encountered {EVENT SYMPTOMS}. The event was triggered by a {CHANGE} at {TIME OF CHANGE THAT CAUSED THE EVENT}. The {CHANGE} contained {DESCRIPTION OF OR REASON FOR THE CHANGE, such as a change in code to update a system}.
-
-A bug in this code caused {DESCRIPTION OF THE PROBLEM}. The event was detected by {MONITORING SYSTEM}. The team started working on the event by {RESOLUTION ACTIONS TAKEN}. This {SEVERITY LEVEL} incident affected {X%} of users.
-
-There was further impact as noted by {e.g. NUMBER OF SUPPORT TICKETS SUBMITTED, SOCIAL MEDIA MENTIONS, CALLS TO ACCOUNT MANAGERS} were raised in relation to this incident.
-```
+This means for a whole hour, pizzas were unable to be purchased, affecting roughly 30 users, and 70 pizza orders. This would classifiy as a SEV-2, affecting 3%-90% of our users, even though 0 support tickets, social media mentions, or calls were raised about this incident.
 
 ## Detection
 
-> [!NOTE]
-> When did the team detect the incident? How did they know it was happening? How could we improve time-to-detection? Consider: How would we have cut that time by half?
+This incident was not detected by any alerts.
 
-```md
-**EXAMPLE**:
+Around 12:00:00 MDT, an Admin was checking on the system to see if there was any problems with the system. They first checked the Grafana dashboard, and noticed 5 spikes in pizza order latency between 8:30:00 and 10:30:00 MDT where it was taking 30 seconds to order a pizza.
 
-This incident was detected when the {ALERT TYPE} was triggered and {TEAM/PERSON} were paged.
+After noticing the huge latency spikes, the Admin went to order a pizza themselves to see what was the problem with the latency, and instead noticed that the pizza order failed to be fulfilled at the factory.
 
-Next, {SECONDARY PERSON} was paged, because {FIRST PERSON} didn't own the service writing to the disk, delaying the response by {XX MINUTES/HOURS}.
-
-{DESCRIBE THE IMPROVEMENT} will be set up by {TEAM OWNER OF THE IMPROVEMENT} so that {EXPECTED IMPROVEMENT}.
-```
+The admin then set up a new Detection where if the Failed Pizza order count is higher than the Successful Pizza order count, then an alert is sent. This way, if there are no more successful pizza orders, then the failed pizza count will be higher, an alert will be sent out, and this problem can be resolved a lot sooner than 1 hour.
 
 ## Impact
 
-> [!NOTE]
-> Describe how the incident impacted internal and external users during the incident. Include how many support cases were raised.
+For 1hr 3min between 11:00:30 MDT and 12:03:14 MDT on 2026-04-03, our users found that their pizza orders were failed to be fulfilled at the factory.
 
-```md
-**EXAMPLE**:
+This incident affected roughly 30 users, or 1 user 30 times, (30 users is 90% of our users, while 1 user is 3% of our users), who experienced this pizza order failure.
 
-For {XXhrs XX minutes} between {XX:XX UTC and XX:XX UTC} on {MM/DD/YY}, {SUMMARY OF INCIDENT} our users experienced this incident.
-
-This incident affected {XX} customers (X% OF {SYSTEM OR SERVICE} USERS), who experienced {DESCRIPTION OF SYMPTOMS}.
-
-{XX NUMBER OF SUPPORT TICKETS AND XX NUMBER OF SOCIAL MEDIA POSTS} were submitted.
-```
+0 support tickets or social media posts were brought up about this issue.
 
 ## Timeline
 
-> [!NOTE]
-> Detail the incident timeline. We recommend using UTC to standardize for timezones.
-> Include any notable lead-up events, any starts of activity, the first known impact, and escalations. Note any decisions or changed made, and when the incident ended, along with any post-impact events of note.
+All times are MDT
 
-```md
-**EXAMPLE**:
-
-All times are UTC.
-
-- _11:48_ - K8S 1.9 upgrade of control plane is finished
-- _12:46_ - Upgrade to V1.9 completed, including cluster-auto scaler and the BuildEng scheduler instance
-- _14:20_ - Build Engineering reports a problem to the KITT Disturbed
-- _14:27_ - KITT Disturbed starts investigating failures of a specific EC2 instance (ip-203-153-8-204)
-- _14:42_ - KITT Disturbed cordons the node
-- _14:49_ - BuildEng reports the problem as affecting more than just one node. 86 instances of the problem show failures are more systemic
-- _15:00_ - KITT Disturbed suggests switching to the standard scheduler
-- _15:34_ - BuildEng reports 200 pods failed
-- _16:00_ - BuildEng kills all failed builds with OutOfCpu reports
-- _16:13_ - BuildEng reports the failures are consistently recurring with new builds and were not just transient.
-- _16:30_ - KITT recognize the failures as an incident and run it as an incident.
-- _16:36_ - KITT disable the Escalator autoscaler to prevent the autoscaler from removing compute to alleviate the problem.
-- _16:40_ - KITT confirms ASG is stable, cluster load is normal and customer impact resolved.
-```
+- _08:41_ - First latency spike in pizza order of 32 seconds occured
+- _08:52_ - Second latency spike in pizza order of 32 seconds occured
+- _09:31_ - Third latency spike in pizza order of 32 seconds occured
+- _09:42_ - Fourth latency spike in pizza order of 16 seconds occured
+- _10:21_ - Fifth latency spike in pizza order of 32 seconds occured
+- _11:01_ - All pizza orders started to fail, dropping successful pizza orders count to 0
+- _12:03_ - Admin noticed the latency spike and tried to order a pizza, noticed the failure
+- _12:04_ - Admin looked through the logs and found the problem and fixed it, allowing users to successfully order pizzas again
 
 ## Response
 
-> [!NOTE]
-> Who responded to the incident? When did they respond, and what did they do? Note any delays or obstacles to responding.
-
-```md
-**EXAMPLE**:
-
-After receiving a page at {XX:XX UTC}, {ON-CALL ENGINEER} came online at {XX:XX UTC} in {SYSTEM WHERE INCIDENT INFO IS CAPTURED}.
-
-This engineer did not have a background in the {AFFECTED SYSTEM} so a second alert was sent at {XX:XX UTC} to {ESCALATIONS ON-CALL ENGINEER} into the who came into the room at {XX:XX UTC}.
-```
+At 12:03:14 MDT on 2026-04-03, Tristan, the admin, came online to check Grafana and the logs, and noticed some weird spikes in the pizza order latency. Then manually checked to see what else he can find out when he noticed he couldn't order pizzas.
 
 ## Root cause
 
-> [!NOTE]
-> Note the final root cause of the incident, the thing identified that needs to change in order to prevent this class of incident from happening again.
-
-```md
-**EXAMPLE**:
-
-A bug in connection pool handling led to leaked connections under failure conditions, combined with lack of visibility into connection state.
-```
+The problem occured from pizzas being ordered, and the pizza factory got overwhelmed from the amount of pizzas ordered.
 
 ## Resolution
 
-> [!NOTE]
-> Describe how the service was restored and the incident was deemed over. Detail how the service was successfully restored and you knew how what steps you needed to take to recovery.
-> Depending on the scenario, consider these questions: How could you improve time to mitigation? How could you have cut that time by half?
+The pizza orders came back online after the admin looked into the logs and went to the problem at hand and fixed it (by clicking on a link). This resolved the issue, and was ensured was resolved by the admin ordering a pizza, and having it work, then checking the logs for the next 10 or so minutes as users were once again able to purchase pizzas.
 
-```md
-**EXAMPLE**:
-By Increasing the size of the BuildEng EC3 ASG to increase the number of nodes available to support the workload and reduce the likelihood of scheduling on oversubscribed nodes
-
-Disabled the Escalator autoscaler to prevent the cluster from aggressively scaling-down
-Reverting the Build Engineering scheduler to the previous version.
-```
+In order to improve the mitigation time, there could have been more and better alerts to keep track of the situation. With these better alerts the admins and JWT team could have seen this problem earlier and fixed these problems a lot sooner than 1 hour.
 
 ## Prevention
 
-> [!NOTE]
-> Now that you know the root cause, can you look back and see any other incidents that could have the same root cause? If yes, note what mitigation was attempted in those incidents and ask why this incident occurred again.
-
-```md
-**EXAMPLE**:
-
-This same root cause resulted in incidents HOT-13432, HOT-14932 and HOT-19452.
-```
+The root cause is a bit confusing, it could be from the pizza factory just failing, too many orders were occuring, or too many orders with big pizzas were occuring which caused the factory to fail. So while the root cause may not be 100% verified, we can keep a better eye on the orders, adding more alerts, logging, tests, and preventative measures to help us better understand what the problem was, and resolve future issues a lot quicker as well.
 
 ## Action items
 
-> [!NOTE]
-> Describe the corrective action ordered to prevent this class of incident in the future. Note who is responsible and when they have to complete the work and where that work is being tracked.
-
-```md
-**EXAMPLE**:
-
-1. Manual auto-scaling rate limit put in place temporarily to limit failures
-1. Unit test and re-introduction of job rate limiting
-1. Introduction of a secondary mechanism to collect distributed rate information across cluster to guide scaling effects
-```
+1. Look into the cause of Grafana's alerting so we can figure out why we didn't catch the latency problem
+1. Disucss other actionable alerts we can undergo about pizza orders and latency to ensure our system is working efficiently
+1. Ensure that we have more team members available, Tristan the Admin was busy until 12 and that was when he was able to check the system. If we had more team members available, we could have this mitigation happen sooner
+1. If we don't have more team members available, figure out how to incorporate AI into the mitigation strategy to have AI solve these issues as soon as they arise.
