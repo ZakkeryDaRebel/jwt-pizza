@@ -187,63 +187,63 @@
 
 #### Attack #1
 
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
+| Item           | Result                                                                                                                                                                                                                                                             |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Date           | April 9, 2026                                                                                                                                                                                                                                                      |
+| Target         | pizza.twpizza.click                                                                                                                                                                                                                                                |
+| Classification | Password Attack                                                                                                                                                                                                                                                    |
+| Severity       | 0                                                                                                                                                                                                                                                                  |
+| Description    | Makenna tried to password attack Tristan's website, using a variety of different attacks, but could not find any information that would allow them to successfully login in. In addition, Makenna got blocked for trying to sign in too many times on one account. |
+| Images         | ![Password Attack Failure](./MAttackTristanPasswordAttack.png) <br/> Having too many authentication attempts is suspicious and gets stopped.                                                                                                                       |
+| Corrections    | No corrections are necessary.                                                                                                                                                                                                                                      |
 
 #### Attack #2
 
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
+| Item           | Result                                                                                                                                                                                                                                        |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Date           | April 9, 2026                                                                                                                                                                                                                                 |
+| Target         | pizza.twpizza.click                                                                                                                                                                                                                           |
+| Classification | Man-in-the-middle                                                                                                                                                                                                                             |
+| Severity       | 0                                                                                                                                                                                                                                             |
+| Description    | Makenna tried to change the information that goes into an order and see if she could get a 'RAINBOW' pizza for free. She encountered an error code instead of getting a pizza for free as the backend would not allow her to have this order. |
+| Images         | ![Failed Man in the Middle attack](./MAttackTristanStackTrace.png) <br/> The backend was able to look into the database to verify the order information, and not blindly trust any request that comes through.                                |
+| Corrections    | No corrections are necessary.                                                                                                                                                                                                                 |
 
 #### Attack #3
 
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
+| Item           | Result                                                                                                                                                                                                                                                                                                                                                                                                    |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Date           | April 9, 2026                                                                                                                                                                                                                                                                                                                                                                                             |
+| Target         | pizza.twpizza.click                                                                                                                                                                                                                                                                                                                                                                                       |
+| Classification | Zero-Day Exploit                                                                                                                                                                                                                                                                                                                                                                                          |
+| Severity       | 1                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Description    | By trying a variety of different attacks, Makenna was able to obtain a couple of different information in the Network tab of the inspector, connected to the error and Tristan's attached stack trace. Makenna couldn't do too much with the information, but someone with potentially more experience could use the information based on my code to launch a more vicious attack to hack into my system. |
+| Images         | ![Stack Trace Exploit](./MAttackTristanStackTrace.png) <br/> Having this information is great for logs, but could be exploited by a malicious user.                                                                                                                                                                                                                                                       |
+| Corrections    | Remove the stack information from the error response, but make sure it is added to the logs if wanted.                                                                                                                                                                                                                                                                                                    |
 
 #### Attack #4
 
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
+| Item           | Result                                                                                                                                                                                                                                                                                                                                                                                   |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Date           | April 9, 2026                                                                                                                                                                                                                                                                                                                                                                            |
+| Target         | pizza.twpizza.click                                                                                                                                                                                                                                                                                                                                                                      |
+| Classification | SQL Injection                                                                                                                                                                                                                                                                                                                                                                            |
+| Severity       | 0                                                                                                                                                                                                                                                                                                                                                                                        |
+| Description    | Makenna tried to do an SQL Injection by changing the url parameters of getting a franchise to something that shouldn't work. Instead, Tristan's code ignored the changes, and returned information as if nothing happened. This proves that the SQL injection attack failed, but it does raise the question if Tristan's code should shut down the request or not because of the attack. |
+| Images         | _add photo_                                                                                                                                                                                                                                                                                                                                                                              |
+| Corrections    | Go through the code, and see how SQL injections are being taken care of, and see if it should be required to shut down the requests or not based on how the injection attack is happening.                                                                                                                                                                                               |
 
 #### Attack #5
 
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
+| Item           | Result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Date           | April 9, 2026                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Target         | pizza.twpizza.click                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Classification | Zero-Day Exploit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Severity       | 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Description    | By going to Tristan's backend /api/docs information, Makenna was able to find where Tristan was hosting his database on, and it's URL. Exposing this information is not very great, but since I have IAM accounts to protect it, it wasn't penetrated. But theoretically it could lead to future hacking with that information out in the wild. This also exposed Tristan's default pizza diner and franchise account, which then lead to a password attack that allowed Makenna to get into his Franchise account, delete his stores, then create a new one with negative revenue, bankrupting his company. |
+| Images         | ![Newly created and bankrupt store](./MAttackTristanBankrupt.png) <br/> Having created a new store, there is negative revenue! That doesn't seem good.                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Corrections    | Remove that information from backend /api/docs to hide where my backend is being stored. In addition, change all default account information to not be shown on /api/docs.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 ## Summary of learning
 
