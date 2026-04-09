@@ -247,4 +247,4 @@
 
 ## Summary of learning
 
-summary
+Tristan and Makenna found multiple lessons about secure deployment. We needed to change our default passwords and not commit them to a public space. Makenna needed to clean up from insider threats. We needed to vet AI suggestions for security, as Tristan added a stack trace to his error messages, per AI request. Tools like Burp Suite helped us to automate attacks. We also should have checked edge cases in unit tests, as well as run some smoke tests.
