@@ -57,67 +57,7 @@
 | Images         | ![Grafana's Sanitized Logs](./TWGrafanaSanitization.png) <br/> Because the Grafana logs are sanitized, little to none important information has been shared to those who shouldn't have the information.                                                                                                                                                                                                                                                                   |
 | Corrections    | Nothing at the moment, but a discussion could be undertaken to debate what information should be sanitzied and aren't currently..                                                                                                                                                                                                                                                                                                                                          |
 
-### Makenna
-
-#### Self Attack #1
-
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
-
-#### Self Attack #2
-
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
-
-#### Self Attack #3
-
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
-
-#### Self Attack #4
-
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
-
-#### Self Attack #5
-
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
+### Makenna did not prepare and attack herself :(
 
 ## Peer Attack
 
@@ -127,11 +67,11 @@
 
 | Item           | Result                                                          |
 | -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
+| Date           | April 9, 2026                                                   |
+| Target         | pizza.makenna.click                                        |
+| Classification | Man in Middle                                                      |
+| Severity       | high                                                               |
+| Description    | Tristan paid himself 1 billion bitcoin ordering a pizza.destroyed. |
 | Images         | _add photo_                                                     |
 | Corrections    | Sanitize user inputs.                                           |
 
@@ -143,7 +83,7 @@
 | Target         | pizza.byucsstudent.click                                        |
 | Classification | Injection                                                       |
 | Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
+| Description    | Failed to SQL injection on login call. |
 | Images         | _add photo_                                                     |
 | Corrections    | Sanitize user inputs.                                           |
 
@@ -155,7 +95,7 @@
 | Target         | pizza.byucsstudent.click                                        |
 | Classification | Injection                                                       |
 | Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
+| Description    | Rainbow attack logged into pizza franchisee, closed all the stores. |
 | Images         | _add photo_                                                     |
 | Corrections    | Sanitize user inputs.                                           |
 
@@ -167,7 +107,7 @@
 | Target         | pizza.byucsstudent.click                                        |
 | Classification | Injection                                                       |
 | Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
+| Description    | Insider attack got config and admin information, allowing him to login as admin and edit franchise information |
 | Images         | _add photo_                                                     |
 | Corrections    | Sanitize user inputs.                                           |
 
@@ -179,7 +119,7 @@
 | Target         | pizza.byucsstudent.click                                        |
 | Classification | Injection                                                       |
 | Severity       | 1                                                               |
-| Description    | SQL injection deleted database. All application data destroyed. |
+| Description    | Stolen auth token after sign out. |
 | Images         | _add photo_                                                     |
 | Corrections    | Sanitize user inputs.                                           |
 
