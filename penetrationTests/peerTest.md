@@ -69,59 +69,58 @@
 | -------------- | --------------------------------------------------------------- |
 | Date           | April 9, 2026                                                   |
 | Target         | pizza.makenna.click                                        |
-| Classification | Man in Middle                                                      |
-| Severity       | high                                                               |
-| Description    | Tristan paid himself 1 billion bitcoin ordering a pizza.destroyed. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
+| Classification | Zero-Day Exploit                                                     |
+| Severity       | 4                                                               |
+| Description    | Tristan paid himself 1 billion bitcoin ordering a pizza, by sending a customized request |
+| Images         | ![image](TattackM1.png)                                                    |
+| Corrections    | Validate user inputs on http requests for pizza orders.                                           |
 
 #### Attack #2
 
 | Item           | Result                                                          |
 | -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | Failed to SQL injection on login call. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
+| Date           | April 9, 2026                                                   |
+| Target         | pizza.makenna.click                                        |
+| Classification | SQL Injection                                                       |
+| Severity       | 0                                                               |
+| Description    | Tristan failed to initiate a SQL injection on a login call. |
+| Images         |![image](TattackM2.png)                                                    |
 
 #### Attack #3
 
 | Item           | Result                                                          |
 | -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | Rainbow attack logged into pizza franchisee, closed all the stores. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
+| Date           | April 9, 2026                                                   |
+| Target         | pizza.makenna.click                                        |
+| Classification | Password Attack                                                      |
+| Severity       | 3                                                               |
+| Description    | Tristan used a default password to log into pizza franchisee, then proceeded to close all the stores, as well as open a new one under the pizza franchisee's name. |
+| Images         |![image](TattackM3.png)                                                    |
+| Corrections    | Add feature from deliverable 4 to change passwords and change them from defaults                                           |
 
 #### Attack #4
 
 | Item           | Result                                                          |
 | -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | Insider attack got config and admin information, allowing him to login as admin and edit franchise information |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
+| Date           | April 9, 2026                                                   |
+| Target         | pizza.makenna.click                                        |
+| Classification | Insider Threat                                                      |
+| Severity       | 3                                                               |
+| Description    | From the jwt-pizza-service repository, Tristen was able to download the artifact produced by the github action, which contained the default admin login, allowing him to edit franchise information. |
+| Images         | ![image](TattackM4.png)                                                     |
+| Corrections    | As part of the publishing workflow, remove the artifact when finished deploying.                                           |
 
 #### Attack #5
 
 | Item           | Result                                                          |
 | -------------- | --------------------------------------------------------------- |
-| Date           | June 18, 2053                                                   |
-| Target         | pizza.byucsstudent.click                                        |
+| Date           | April 9, 2026                                                   |
+| Target         | pizza.makenna.click                                        |
 | Classification | Injection                                                       |
-| Severity       | 1                                                               |
-| Description    | Stolen auth token after sign out. |
-| Images         | _add photo_                                                     |
-| Corrections    | Sanitize user inputs.                                           |
+| Severity       | 0                                                               |
+| Description    | After gaining login access, Tristan copied the authtoken to another request, hoping to make a request after the admin had logged out. This did not succeed. |
+| Images         | ![image](TattackM5.png)                                                  |
+
 
 ### Makenna toward Tristan's website
 
