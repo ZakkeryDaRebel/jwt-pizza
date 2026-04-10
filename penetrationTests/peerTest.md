@@ -65,62 +65,61 @@
 
 #### Attack #1
 
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | April 9, 2026                                                   |
-| Target         | pizza.makenna.click                                        |
-| Classification | Zero-Day Exploit                                                     |
-| Severity       | 4                                                               |
+| Item           | Result                                                                                   |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| Date           | April 9, 2026                                                                            |
+| Target         | pizza.makenna.click                                                                      |
+| Classification | Zero-Day Exploit                                                                         |
+| Severity       | 4                                                                                        |
 | Description    | Tristan paid himself 1 billion bitcoin ordering a pizza, by sending a customized request |
-| Images         | ![image](TattackM1.png)                                                    |
-| Corrections    | Validate user inputs on http requests for pizza orders.                                           |
+| Images         | ![image](TattackM1.png)                                                                  |
+| Corrections    | Validate user inputs on http requests for pizza orders.                                  |
 
 #### Attack #2
 
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | April 9, 2026                                                   |
-| Target         | pizza.makenna.click                                        |
-| Classification | SQL Injection                                                       |
-| Severity       | 0                                                               |
+| Item           | Result                                                      |
+| -------------- | ----------------------------------------------------------- |
+| Date           | April 9, 2026                                               |
+| Target         | pizza.makenna.click                                         |
+| Classification | SQL Injection                                               |
+| Severity       | 0                                                           |
 | Description    | Tristan failed to initiate a SQL injection on a login call. |
-| Images         |![image](TattackM2.png)                                                    |
+| Images         | ![image](TattackM2.png)                                     |
 
 #### Attack #3
 
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | April 9, 2026                                                   |
-| Target         | pizza.makenna.click                                        |
-| Classification | Password Attack                                                      |
-| Severity       | 3                                                               |
+| Item           | Result                                                                                                                                                             |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Date           | April 9, 2026                                                                                                                                                      |
+| Target         | pizza.makenna.click                                                                                                                                                |
+| Classification | Password Attack                                                                                                                                                    |
+| Severity       | 3                                                                                                                                                                  |
 | Description    | Tristan used a default password to log into pizza franchisee, then proceeded to close all the stores, as well as open a new one under the pizza franchisee's name. |
-| Images         |![image](TattackM3.png)                                                    |
-| Corrections    | Add feature from deliverable 4 to change passwords and change them from defaults                                           |
+| Images         | ![image](TattackM3.png)                                                                                                                                            |
+| Corrections    | Add feature from deliverable 4 to change passwords and change them from defaults                                                                                   |
 
 #### Attack #4
 
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | April 9, 2026                                                   |
-| Target         | pizza.makenna.click                                        |
-| Classification | Insider Threat                                                      |
-| Severity       | 3                                                               |
+| Item           | Result                                                                                                                                                                                               |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Date           | April 9, 2026                                                                                                                                                                                        |
+| Target         | pizza.makenna.click                                                                                                                                                                                  |
+| Classification | Insider Threat                                                                                                                                                                                       |
+| Severity       | 3                                                                                                                                                                                                    |
 | Description    | From the jwt-pizza-service repository, Tristen was able to download the artifact produced by the github action, which contained the default admin login, allowing him to edit franchise information. |
-| Images         | ![image](TattackM4.png)                                                     |
-| Corrections    | As part of the publishing workflow, remove the artifact when finished deploying.                                           |
+| Images         | ![image](TattackM4.png)                                                                                                                                                                              |
+| Corrections    | As part of the publishing workflow, remove the artifact when finished deploying.                                                                                                                     |
 
 #### Attack #5
 
-| Item           | Result                                                          |
-| -------------- | --------------------------------------------------------------- |
-| Date           | April 9, 2026                                                   |
-| Target         | pizza.makenna.click                                        |
-| Classification | Injection                                                       |
-| Severity       | 0                                                               |
+| Item           | Result                                                                                                                                                      |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Date           | April 9, 2026                                                                                                                                               |
+| Target         | pizza.makenna.click                                                                                                                                         |
+| Classification | Injection                                                                                                                                                   |
+| Severity       | 0                                                                                                                                                           |
 | Description    | After gaining login access, Tristan copied the authtoken to another request, hoping to make a request after the admin had logged out. This did not succeed. |
-| Images         | ![image](TattackM5.png)                                                  |
-
+| Images         | ![image](TattackM5.png)                                                                                                                                     |
 
 ### Makenna toward Tristan's website
 
@@ -169,7 +168,7 @@
 | Classification | SQL Injection                                                                                                                                                                                                                                                                                                                                                                            |
 | Severity       | 0                                                                                                                                                                                                                                                                                                                                                                                        |
 | Description    | Makenna tried to do an SQL Injection by changing the url parameters of getting a franchise to something that shouldn't work. Instead, Tristan's code ignored the changes, and returned information as if nothing happened. This proves that the SQL injection attack failed, but it does raise the question if Tristan's code should shut down the request or not because of the attack. |
-| Images         | _add photo_                                                                                                                                                                                                                                                                                                                                                                              |
+| Images         | ![SQL Attack](./MAttackTristanSQL.png) <br/> At the top line, we see an SQL attack in the url parameters, but Tristan's code ignores the attack and still just returns a normal 200 status code response.                                                                                                                                                                                |
 | Corrections    | Go through the code, and see how SQL injections are being taken care of, and see if it should be required to shut down the requests or not based on how the injection attack is happening.                                                                                                                                                                                               |
 
 #### Attack #5
